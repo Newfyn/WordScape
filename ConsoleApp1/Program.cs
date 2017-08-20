@@ -10,24 +10,7 @@ namespace WordScape
             Chatloop(playername);
         }
 
-        class Sample
-        {
-            public static void Chatloop()
-            {
-                string str = Console.ReadLine();
-                Console.WriteLine("1) The length of '{0}' is {1}", str, str.Length);
-                Console.WriteLine("2) The length of '{0}' is {1}", "xyz", "xyz".Length);
-
-                int length = str.Length;
-                Console.WriteLine("3) The length of '{0}' is '{1}'", str, length);
-
-
-
-            }
-        }
-
-
-        static void Chatloop(string playername)
+        static void Chatloop(string playerName)
         {
             Console.WriteLine("Welcome to WordScape.");
 
@@ -36,40 +19,24 @@ namespace WordScape
                 
                 var input = Console.ReadLine();
                 if (input.Length <= Console.BufferWidth)
-                    {
-                    Console.SetCursorPosition(0, Console.CursorTop - 1);
-                    ClearCurrentConsoleLine();
-                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {playername}: {input}");
+                {
+                    ClearLines(1);
+                    PrintMessage(playerName, input);
                 }
                 if (input.Length > Console.BufferWidth && input.Length <= Console.BufferWidth*2)
-                    {
-                    for (var i = 0; i < 2;)
-                        {
-                        Console.SetCursorPosition(0, Console.CursorTop - 1);
-                        ClearCurrentConsoleLine();
-                        i++;
-                        }
-                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {playername}: {input}");
+                {
+                    ClearLines(2);
+                    PrintMessage(playerName, input);
                 }
                 if (input.Length > Console.BufferWidth*2 && input.Length <= Console.BufferWidth*3)
-                    {
-                    for (var i = 0; i < 3;)
-                        {
-                        Console.SetCursorPosition(0, Console.CursorTop - 1);
-                        ClearCurrentConsoleLine();
-                        i++;
-                        }
-                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {playername}: {input}");
+                {
+                    ClearLines(3);
+                    PrintMessage(playerName, input);
                 }
                 if (input.Length > Console.BufferWidth*3 && input.Length <= 254)
-                    {
-                    for (var i = 0; i < 4;)
-                        {
-                        Console.SetCursorPosition(0, Console.CursorTop - 1);
-                        ClearCurrentConsoleLine();
-                        i++;
-                        }
-                    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {playername}: {input}");
+                {
+                    ClearLines(4);
+                    PrintMessage(playerName, input);
                 }
             }
             
@@ -90,6 +57,21 @@ namespace WordScape
             Console.Write(new string(' ', Console.WindowWidth));
             Console.SetCursorPosition(0, currentLineCursor);
         }
-        
+
+        public static void ClearLines(int numberOfLines)
+        {
+            for (var i = 0; i < numberOfLines;)
+            {
+                Console.SetCursorPosition(0, Console.CursorTop - 1);
+                ClearCurrentConsoleLine();
+                i++;
+            }
+        }
+
+        public static void PrintMessage(string playerName, string input)
+        {
+            Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {playerName}: {input}");
+        }
+
     }
 }
